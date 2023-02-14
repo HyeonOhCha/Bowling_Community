@@ -34,7 +34,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class UserController {
 	
-	int idHepler;  // 카카오 로그인시 아이디 중복방지용 변수 
+	
 	
 	@Value("${cos.key}")
 	private String cosKey;
@@ -71,7 +71,7 @@ public class UserController {
 		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 		params.add("grant_type", "authorization_code");
 		params.add("client_id", "1806ffac320379da55f20ce05554df7b");
-		params.add("redirect_uri", "http://localhost:8082/auth/kakao/callback");
+		params.add("redirect_uri", "http://localhost:8000/auth/kakao/callback");
 		params.add("code", code);
 		
 		// HttpHeader와 HttpBody를 하나의 오브젝트에 담기
@@ -134,20 +134,20 @@ public class UserController {
 		System.out.println("카카오 아이디(번호) : "+kakaoProfile.getId());
 		System.out.println("카카오 이메일 : "+kakaoProfile.getKakao_account().getEmail());
 		
-		System.out.println("블로그서버 유저네임 : "+kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
+		System.out.println("블로그서버 유저네임 : "+kakaoProfile.getKakao_account().getEmail());
 		System.out.println("블로그서버 이메일 : "+kakaoProfile.getKakao_account().getEmail());
 		// UUID란 -> 중복되지 않는 어떤 특정 값을 만들어내는 알고리즘
 		UUID garbagePassword = UUID.randomUUID();
 		System.out.println("블로그서버 패스워드 : "+garbagePassword);
 		
 		User kakaoUser = User.builder()
-				.username(kakaoProfile.getKakao_account().getEmail()+"_"+idHepler)
+				.username(kakaoProfile.getKakao_account().getEmail())
 				.password(cosKey)
 				.email(kakaoProfile.getKakao_account().getEmail())
 				.build();
 		
 		// 가입자 혹은 비가입자 체크 해서 처리
-		User originUser = userService.회원찾기(kakaoUser.getUsername());
+		User originUser = userService.회원찾기(kakaoUser.getUsername()+"_"+kakaoProfile.getId());
 
 		if(originUser.getUsername() == null) {
 			System.out.println("기존 회원이 아니기에 자동 회원가입을 진행합니다");
@@ -157,11 +157,6 @@ public class UserController {
 		// 로그인 처리
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(kakaoUser.getUsername(), cosKey));
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		
-		// 카카오 id오류(int범위 벗어나는 오류)때문에 따로 id값 설정을 위한 코드
-		idHepler++;
-		
-		
 		
 		return  "redirect:/";
 	}
