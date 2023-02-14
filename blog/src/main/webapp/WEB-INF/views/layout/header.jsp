@@ -29,8 +29,6 @@
 		</button>
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 
-
-
 			<c:choose>
 				<c:when test="${ empty principal }">
 					<ul class="navbar-nav">
@@ -47,8 +45,14 @@
 				</c:otherwise>
 
 			</c:choose>
-
-
+			
+					<ul class="navbar-nav" >
+						<li class="nav-item"><a class="nav-link" href="#">정하님게시판</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">현오님게시판</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">재성님게시판</a></li>
+						<li class="nav-item"><a class="nav-link" href="/freeBoard/freeMain">자유게시판</a></li>
+					</ul>
+			
 		</div>
 	</nav>
 	<br>
