@@ -4,7 +4,7 @@
 
 <div class="container">
 	<button class="btn btn-secondary" onclick="history.back()">돌아가기</button>
-	test 
+	test 정종호 깃허브확인!!!!!!!!!!!!!
 	<c:if test="${board.user.id == principal.user.id}">
 		<a href="/board/${board.id}/updateForm" class="btn btn-warning">수정</a>
 		<button id="btn-delete" class="btn btn-danger">삭제</button>
