@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ReplySaveRequestDto {
+public class FreeReplySaveRequestDto {
 	private int userId;
-	private int boardId;
-	private String content;
+	private int free_boardId;
+	private String freeReply_content;
 	
 
 }
