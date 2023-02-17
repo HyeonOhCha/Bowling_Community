@@ -1,5 +1,7 @@
 package com.cos.blog.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,19 +24,37 @@ public class FreeBoardService {
 
 	@Autowired
 	private FreeReplyRepository freeReply_Repository;
+	
+	
 
 	@Transactional
 	public void freeBoard_write(FreeBoard freeboard, User user) { // title , content
-		freeboard.setFreeBoard_count(0);
+		freeboard.setFreeBoardCount(0);
 		freeboard.setUser(user);
 		freeBoard_Repository.save(freeboard);
 	}
+
+//	@Transactional(readOnly = true)
+//	public Page<FreeBoard> freeBoard_list(Pageable pageable) {
+//
+//		return freeBoard_Repository.findAll(pageable);
+//	}
 
 	@Transactional(readOnly = true)
 	public Page<FreeBoard> freeBoard_list(Pageable pageable) {
 
 		return freeBoard_Repository.findAll(pageable);
 	}
+	
+	@Transactional(readOnly = true)
+	    public Page<FreeBoard> search(String searchType, Pageable pageable) {
+
+			Page<FreeBoard> boardList = freeBoard_Repository.findByFreeBoardTitleContaining(searchType, pageable);
+	        
+	        return boardList;
+	   }
+
+
 
 	@Transactional(readOnly = true)
 	public FreeBoard freeBoard_detail(int id) {
@@ -54,14 +74,14 @@ public class FreeBoardService {
 		FreeBoard freeboard = freeBoard_Repository.findById(id).orElseThrow(() -> {
 			return new IllegalArgumentException("자유게시판 글 찾기 실패 : 아이디를 찾을 수 없습니다.");
 		}); // 영속화 완료
-		freeboard.setFreeBoard_title(requestBoard.getFreeBoard_title());
-		freeboard.setFreeBoard_content(requestBoard.getFreeBoard_content());
+		freeboard.setFreeBoardTitle(requestBoard.getFreeBoardTitle());
+		freeboard.setFreeBoardContent(requestBoard.getFreeBoardContent());
 		// 해당 함수로 종료시 (트랙젝션이 Service 가 종료될 때) 트랜젝션이 종료됩니다. 이때 더티체킹 - 자동 업데이트가 db flush
 	}
 
 	@Transactional
 	public void freeReply_write(FreeReplySaveRequestDto freeRequest) {
-		int result = freeReply_Repository.mSave(freeRequest.getUserId(), freeRequest.getFree_boardId(), freeRequest.getFreeReply_content());
+		int result = freeReply_Repository.mSave(freeRequest.getUserId(), freeRequest.getFreeBoardId(), freeRequest.getFreeReplyContent());
 		System.out.println("FreeBoardService : "+result);
 	}
 	
@@ -77,5 +97,5 @@ public class FreeBoardService {
 	}
 
 	
-	
+
 }

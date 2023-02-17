@@ -6,13 +6,13 @@
 	<form>
 		<input type="hidden" id="id" value="${board.id}"/>
 		<div class="form-group">
-			<label for="freeBoard_title">Title</label>
-			 <input value="${board.freeBoard_title}" type="text" class="form-control" placeholder="Enter title" id="freeBoard_title">
+			<label for="freeBoardTitle">Title</label>
+			 <input value="${board.freeBoardTitle}" type="text" class="form-control" placeholder="Enter title" id="freeBoardTitle">
 		</div>
 
 	<div class="form-group">
- 	 <label for="freeBoard_content">Content</label>
-  	<textarea class="form-control summernote" rows="5" id="freeBoard_content">${board.freeBoard_content}</textarea>
+ 	 <label for="freeBoardContent">Content</label>
+  	<textarea class="form-control summernote" rows="5" id="freeBoardContent">${board.freeBoardContent}</textarea>
 	</div>
 	</form>
 	

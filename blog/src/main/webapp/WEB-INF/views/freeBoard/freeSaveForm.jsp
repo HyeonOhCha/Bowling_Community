@@ -5,14 +5,14 @@
 <div class="container">
 	<form>
 		<div class="form-group">
-			<label for="freeBoard_title">Title</label>
-			 <input type="text" class="form-control" placeholder="Enter title" id="freeBoard_title">
+			<label for="freeBoardTitle">Title</label>
+			 <input type="text" class="form-control" placeholder="Enter title" id="freeBoardTitle">
 	
 		</div>
 
 	<div class="form-group">
- 	 <label for="freeBoard_content">Content</label>
-  	<textarea class="form-control summernote" rows="5" id="freeBoard_content"></textarea>
+ 	 <label for="freeBoardContent">Content</label>
+  	<textarea class="form-control summernote" rows="5" id="freeBoardContent"></textarea>
 	</div>
 	</form>
 	

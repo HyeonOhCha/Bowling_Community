@@ -38,21 +38,22 @@ public class FreeBoard {
 	private int id; 
 	
 	@Column(nullable = false, length = 100)
-	private String freeBoard_title;
+	private String freeBoardTitle;
 	
 	@Lob // 대용량 데이터
-	private String freeBoard_content; // 섬머노트 라이브러리 <html>태그가 섞여서 디자인이 됨.
+	private String freeBoardContent; // 섬머노트 라이브러리 <html>태그가 섞여서 디자인이 됨.
 	
-	private int freeBoard_count; // 조회수
+	private int freeBoardCount; // 조회수
 	
 	@ManyToOne(fetch = FetchType.EAGER)  // Many = Many,  User = One
 	@JoinColumn(name="userId")
 	private User user; // DB는 오브젝트를 저장할 수 없다. FK, 자바는 오브젝트를 저장할 수 있다. 
 	
-	@OneToMany(mappedBy = "free_board", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) // mappedBy 연관관계의 주인이 아니다 (난 FK가 아니에요) DB에 칼럼을 만들지 마세요.
-	@JsonIgnoreProperties({"free_board"})
+	@OneToMany(mappedBy = "freeBoard", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) // mappedBy 연관관계의 주인이 아니다 (난 FK가 아니에요) DB에 칼럼을 만들지 마세요.
+	@JsonIgnoreProperties({"freeBoard"})
+	
 	@OrderBy("id desc")
-	private List<FreeReply> free_replys;
+	private List<FreeReply> freeReplys;
 	
 	@CreationTimestamp
 	private LocalDateTime createDate;

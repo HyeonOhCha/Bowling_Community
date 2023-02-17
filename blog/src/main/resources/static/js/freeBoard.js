@@ -16,15 +16,15 @@ let index = {
 
 		save: function(){
 			let data = {
-					freeBoard_title: $("#freeBoard_title").val(),
-					freeBoard_content: $("#freeBoard_content").val()
+					freeBoardTitle: $("#freeBoardTitle").val(),
+					freeBoardContent: $("#freeBoardContent").val()
 					
 			};
 		//	alert(content);
 			
 			$.ajax({ 
 				type: "POST",
-				url: "/api/free_board",
+				url: "/api/freeBoard",
 				data: JSON.stringify(data),
 				contentType: "application/json; charset=utf-8",
 				dataType: "json"
@@ -55,8 +55,8 @@ let index = {
 			let id = $("#id").val();
 			
 			let data = {
-					freeBoard_title: $("#freeBoard_title").val(),
-					freeBoard_content: $("#freeBoard_content").val()
+					freeBoardTitle: $("#freeBoardTitle").val(),
+					freeBoardContent: $("#freeBoardContent").val()
 			};
 
 			$.ajax({ 
@@ -76,19 +76,19 @@ let index = {
 		replySave: function(){
 			let data = {
 					userId: $("#userId").val(),
-					free_boardId: $("#free_boardId").val(),
-					freeReply_content: $("#freeReply-content").val()
+					freeBoardId: $("#freeBoardId").val(),
+					freeReplyContent: $("#freeReplyContent").val()
 			};
 			
 			$.ajax({ 
 				type: "POST",
-				url: `/api/freeBoard/${data.free_boardId}/freeReply`,
+				url: `/api/freeBoard/${data.freeBoardId}/freeReply`,
 				data: JSON.stringify(data),
 				contentType: "application/json; charset=utf-8",
 				dataType: "json"
 			}).done(function(resp){
 				alert("자유게시판 댓글작성이 완료되었습니다.");
-				location.href = `/freeBoard/${data.free_boardId}`;
+				location.href = `/freeBoard/${data.freeBoardId}`;
 			}).fail(function(error){
 				alert(JSON.stringify(error));
 			}); 

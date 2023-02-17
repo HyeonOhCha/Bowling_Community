@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FreeReplySaveRequestDto {
 	private int userId;
-	private int free_boardId;
-	private String freeReply_content;
+	private int freeBoardId;
+	private String freeReplyContent;
 	
 
 }
