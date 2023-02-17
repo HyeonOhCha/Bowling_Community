@@ -23,9 +23,9 @@ public class FreeBoardApiController {
 	private FreeBoardService freeboard_Service;
 	
 
-	@PostMapping("/api/free_board")
-	public ResponseDto<Integer> save(@RequestBody FreeBoard free_board, @AuthenticationPrincipal PrincipalDetail principal) {
-		freeboard_Service.freeBoard_write(free_board, principal.getUser());
+	@PostMapping("/api/freeBoard")
+	public ResponseDto<Integer> save(@RequestBody FreeBoard freeBoard, @AuthenticationPrincipal PrincipalDetail principal) {
+		freeboard_Service.freeBoard_write(freeBoard, principal.getUser());
 		System.out.println("FreeBoardApiController !!");
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
 	}
@@ -37,14 +37,14 @@ public class FreeBoardApiController {
 	}
 	
 	@PutMapping("/api/freeBoard/{id}")
-	public ResponseDto<Integer> update(@PathVariable int id, @RequestBody FreeBoard free_board){
-		freeboard_Service.freeBoard_update(id,free_board);
+	public ResponseDto<Integer> update(@PathVariable int id, @RequestBody FreeBoard freeBoard){
+		freeboard_Service.freeBoard_update(id,freeBoard);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
 	// 데이터 받을 때 컨트롤러에서 dto를 만들어서 받는게 좋다.
 	// dto 사용하지 않은 이유는!! FreeReplySaveRequestDto
-	@PostMapping("/api/freeBoard/{free_boardId}/freeReply")
+	@PostMapping("/api/freeBoard/{freeBoardId}/freeReply")
 	public ResponseDto<Integer> replySave(@RequestBody FreeReplySaveRequestDto freeRequest) {
 		freeboard_Service.freeReply_write(freeRequest);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
@@ -52,6 +52,19 @@ public class FreeBoardApiController {
 	
 	@DeleteMapping("/api/freeBoard/freeReply/{id}")
 	public ResponseDto<Integer> replyDelete(@PathVariable int id) {
+		freeboard_Service.freeReply_delete(id);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
+	}
+	
+	// 대댓글용
+	@PostMapping("/api/freeBoard/{freeBoardId}/freeSubReply")
+	public ResponseDto<Integer> subReplySave(@RequestBody FreeReplySaveRequestDto freeRequest) {
+		freeboard_Service.freeReply_write(freeRequest);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
+	}
+	
+	@DeleteMapping("/api/freeBoard/freeSubReply/{id}")
+	public ResponseDto<Integer> subReplyDelete(@PathVariable int id) {
 		freeboard_Service.freeReply_delete(id);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
 	}

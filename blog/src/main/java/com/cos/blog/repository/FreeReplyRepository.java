@@ -8,6 +8,6 @@ import com.cos.blog.model.FreeReply;
 
 public interface FreeReplyRepository extends JpaRepository<FreeReply, Integer>{
 	@Modifying
-	@Query(value="INSERT INTO freeReply(userId, free_boardId, freeReply_content, createDate) VALUES(?1, ?2, ?3, now())", nativeQuery = true)
-	int mSave(int userId, int free_boardId, String freeReply_content); // 업데이트된 행의 개수를 리턴해줌.  
+	@Query(value="INSERT INTO freeReply(userId, freeBoardId, freeReplyContent, createDate) VALUES(?1, ?2, ?3, now())", nativeQuery = true)
+	int mSave(int userId, int freeBoardId, String freeReplyContent); // 업데이트된 행의 개수를 리턴해줌.  
 }
