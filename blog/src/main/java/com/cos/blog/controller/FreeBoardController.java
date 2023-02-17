@@ -31,36 +31,39 @@ public class FreeBoardController {
 //		return "freeBoard/freeMain";
 //	}
 	
-//	@GetMapping("/freeBoard/freeMain")
-//	public String freeForm(Model model,
-//			@PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-//
-//		Page<FreeBoard> list = freeboard_Service.freeBoard_list(pageable);
-//		
-//		
-//				
-//		int nowPage = list.getPageable().getPageNumber() + 1;
-//		int startPage = Math.max(nowPage - 4, 1);
-//		int endPage = Math.min(nowPage+ 5, list.getTotalPages());
-//		
-//		model.addAttribute("nowPage", nowPage);
-//		model.addAttribute("startPage", startPage);
-//		model.addAttribute("endPage", endPage);
-//		model.addAttribute("freeboards", list);
-//		
-//		return "freeBoard/freeMain";
-//	}
+	@GetMapping("/freeBoard/freeMain")
+	public String freeForm(Model model,
+			@PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+
+		Page<FreeBoard> list = freeboard_Service.freeBoard_list(pageable);
+		
+		int pageNumber=list.getPageable().getPageNumber(); //현재페이지
+		int totalPages=list.getTotalPages(); //총 페이지 수. 검색에따라 10개면 10개..
+		int pageBlock = 5; //블럭의 수 1, 2, 3, 4, 5	
+		int startBlockPage = ((pageNumber)/pageBlock)*pageBlock+1; //현재 페이지가 7이라면 1*5+1=6
+		int endBlockPage = startBlockPage+pageBlock-1; //6+5-1=10. 6,7,8,9,10해서 10.
+		endBlockPage= totalPages<endBlockPage? totalPages:endBlockPage;
+		
+		model.addAttribute("startBlockPage", startBlockPage);
+		model.addAttribute("endBlockPage", endBlockPage);
+
+		model.addAttribute("freeboards", list);
+		
+		return "freeBoard/freeMain";
+	}
 	
 	// 검색
-	@GetMapping("/freeBoard/freeMain")
+	@GetMapping("/freeBoard/search")
     public String search(String searchText, @PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable, 
     		Model model ) {
 
         Page<FreeBoard> searchList = freeboard_Service.search(searchText, pageable);
 
+       model.addAttribute("searchText", searchText);
+       
        model.addAttribute("freeboards", searchList);
 
-        return "freeBoard/freeMain";
+        return "freeBoard/freeMainSearch";
 	}
 
 	

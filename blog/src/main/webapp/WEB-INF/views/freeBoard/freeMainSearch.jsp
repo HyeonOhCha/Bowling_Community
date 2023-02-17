@@ -9,7 +9,7 @@
 <H2 >자유게시판</H2>
 
  	<form method="GET"  action="/freeBoard/search" class="form-inline d-Flex justify-content-end" role="search">
-        <input type="text" name="searchText" class="form-control" id="searchText" placeholder="검색" >
+        <input type="text" name="searchText" class="form-control" id="searchText" placeholder="검색"  value="${searchText}">
         <button type="submit" class="btn btn-primary mb-2">검색</button>
     </form> 
 
@@ -28,7 +28,7 @@
 	<tbody>
 		<tr>
 			<th>${board.id }</th>
-			<th><a href="/freeBoard/${board.id}"  style="color:black; text-decoration:none;"> ${board.freeBoardTitle }</th></a>
+			<th><a href="/freeBoard/${board.id}"  style="color:black; text-decoration:none;"> ${board.freeBoardTitle}</th></a>
 			<th>${board.user.username }</th>
 			<th>	<fmt:parseDate value="${board.createDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="lastupdate" type="both" />
 					<fmt:formatDate pattern="yyyy-MM-dd" value="${lastupdate}" /></th>
@@ -39,24 +39,25 @@
 </table>
 <a class="btn btn-primary" href="/freeBoard/freeSaveForm">글쓰기</a>
 
+
 <ul class="pagination justify-content-center" >
   <c:choose>
   	<c:when test="${freeboards.first}">
-  		 <li class="page-item disabled"><a class="page-link" href="?page=${freeboards.number-1}">Previous</a></li>
+  		 <li class="page-item disabled"><a class="page-link" href="?searchText=${searchText}&page=${freeboards.number-1}">Previous</a></li>
   	</c:when>
   	
   	<c:otherwise>
-  		<li class="page-item "><a class="page-link" href="?page=${freeboards.number-1}">Previous</a></li>
+  		<li class="page-item "><a class="page-link" href="?searchText=${searchText}&page=${freeboards.number-1}">Previous</a></li>
   	</c:otherwise>
   </c:choose>
   
   <c:choose>
    	<c:when test="${freeboards.last}">
-  		 <li class="page-item disabled"><a class="page-link" href="?page=${freeboards.number+1}">Next</a></li>
+  		 <li class="page-item disabled"><a class="page-link" href="?searchText=${searchText}&page=${freeboards.number+1}">Next</a></li>
   	</c:when>
   	
   	<c:otherwise>
-  		<li class="page-item"><a class="page-link" href="?page=${freeboards.number+1}">Next</a></li>
+  		<li class="page-item"><a class="page-link" href="?searchText=${searchText}&page=${freeboards.number+1}">Next</a></li>
   	</c:otherwise>
   </c:choose>
   
