@@ -1,7 +1,5 @@
 package com.cos.blog.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cos.blog.model.FreeBoard;
 import com.cos.blog.service.FreeBoardService;
@@ -20,22 +19,26 @@ public class FreeBoardController {
 
 	@Autowired
 	private FreeBoardService freeboard_Service;
-	
 
-// 페이징 원본
-//	@GetMapping("/freeBoard/freeMain")
-//	public String freeForm(Model model,
-//			@PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-//
-//		model.addAttribute("freeboards", freeboard_Service.freeBoard_list(pageable));
-//		return "freeBoard/freeMain";
-//	}
-	
+
 	@GetMapping("/freeBoard/freeMain")
 	public String freeForm(Model model,
-			@PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-
+			@PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+			@RequestParam(required = false, defaultValue = "") String field,
+			@RequestParam(required = false, defaultValue = "") String searchText) {
+	
 		Page<FreeBoard> list = freeboard_Service.freeBoard_list(pageable);
+		
+		if(field.equals("title")) {
+			list = freeboard_Service.TitleSearch(searchText, pageable);
+		}
+		else if(field.equals("content")){
+			list = freeboard_Service.ContentSearch(searchText, pageable);
+		}
+		
+//		else if(field.equals("TitleOrContent")){
+//			list = freeboard_Service.TitleOrContent_Search(searchText, pageable);
+//		}
 		
 		int pageNumber=list.getPageable().getPageNumber(); //현재페이지
 		int totalPages=list.getTotalPages(); //총 페이지 수. 검색에따라 10개면 10개..
@@ -51,28 +54,14 @@ public class FreeBoardController {
 		
 		return "freeBoard/freeMain";
 	}
-	
-	// 검색
-	@GetMapping("/freeBoard/search")
-    public String search(String searchText, @PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable, 
-    		Model model ) {
 
-        Page<FreeBoard> searchList = freeboard_Service.search(searchText, pageable);
 
-       model.addAttribute("searchText", searchText);
-       
-       model.addAttribute("freeboards", searchList);
 
-        return "freeBoard/freeMainSearch";
-	}
-
-	
 	// USER 권한이 필요
 	@GetMapping("/freeBoard/freeSaveForm")
 	public String freeSaveForm() {
 		return "freeBoard/freeSaveForm";
 	}
-
 
 	@GetMapping("/freeBoard/{id}")
 	public String findById(@PathVariable int id, Model model) {
@@ -80,7 +69,6 @@ public class FreeBoardController {
 		model.addAttribute("board", freeboard_Service.freeBoard_detail(id));
 		return "freeBoard/freeDetail";
 	}
-		
 
 	@GetMapping("/freeBoard/{id}/freeUpdateForm")
 	public String updateForm(@PathVariable int id, Model model) {
