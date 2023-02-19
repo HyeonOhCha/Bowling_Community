@@ -8,6 +8,11 @@
 
 <H2 >자유게시판</H2>
 
+
+<a class="btn btn-primary" href="/freeBoard/freeMain?sort=freeBoardCount,DESC&field=${param.field}&searchText=${param.searchText}">조회순</a>
+<a class="btn btn-primary" href="/freeBoard/freeMain?sort=freeBoardTitle,ASC&field=${param.field}&searchText=${param.searchText}">제목순</a>
+<a class="btn btn-primary" href="/freeBoard/freeMain?sort=userId,DESC&field=${param.field}&searchText=${param.searchText}">작성자순</a>
+
  	<form method="GET"  action="/freeBoard/freeMain" class="form-inline d-Flex justify-content-end" role="search">
 			<select name="field" id="field" class="form-control form-control-sm">
 				<!-- <option value="TitleOrContent">제목+내용</option> -->
@@ -17,6 +22,7 @@
         <input type="text" name="searchText" class="form-control" id="searchText" placeholder="검색" >
         <button type="submit" class="btn btn-primary mb-2">검색</button>
     </form> 
+
 
 <table class="table table-hover table-striped text-center" style="border: 1px solid;">
 	<thead>
@@ -54,8 +60,8 @@
 			<c:choose>
 				<c:when test="${freeboards.first}"></c:when>
 				<c:otherwise>
-					<li class="page-item"><a class="page-link" href="/freeBoard/freeMain?field=${param.field}&searchText=${param.searchText}&page=0">처음</a></li>
-					<li class="page-item"><a class="page-link" href="/freeBoard/freeMain?field=${param.field}&searchText=${param.searchText}&page=${freeboards.number-1}">&larr;</a></li>
+					<li class="page-item"><a class="page-link" href="/freeBoard/freeMain?sort=${sort}&field=${param.field}&searchText=${param.searchText}&page=0">처음</a></li>
+					<li class="page-item"><a class="page-link" href="/freeBoard/freeMain?sort=${sort}&field=${param.field}&searchText=${param.searchText}&page=${freeboards.number-1}">&larr;</a></li>
 				</c:otherwise>
 			</c:choose>
 			
@@ -63,10 +69,10 @@
 			<c:forEach begin="${startBlockPage}" end="${endBlockPage}" var="i">
 				<c:choose>
 					<c:when test="${freeboards.pageable.pageNumber+1 == i}">
-						<li class="page-item disabled"><a class="page-link" href="/freeBoard/freeMain?field=${param.field}&searchText=${param.searchText}&page=${i-1}">${i}</a></li>
+						<li class="page-item disabled"><a class="page-link" href="/freeBoard/freeMain?sort=${sort}&field=${param.field}&searchText=${param.searchText}&page=${i-1}">${i}</a></li>
 					</c:when>
 					<c:otherwise>
-						<li class="page-item"><a class="page-link" href="/freeBoard/freeMain?field=${param.field}&searchText=${param.searchText}&page=${i-1}">${i}</a></li>
+						<li class="page-item"><a class="page-link" href="/freeBoard/freeMain?sort=${sort}&field=${param.field}&searchText=${param.searchText}&page=${i-1}">${i}</a></li>
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
@@ -75,8 +81,8 @@
 			<c:choose>
 				<c:when test="${freeboards.last}"></c:when>
 				<c:otherwise>
-					<li class="page-item "><a class="page-link" href="/freeBoard/freeMain?field=${param.field}&searchText=${param.searchText}&page=${freeboards.number+1}">&rarr;</a></li>
-					<li class="page-item "><a class="page-link" href="/freeBoard/freeMain?field=${param.field}&searchText=${param.searchText}&page=${freeboards.totalPages-1}">마지막</a></li>
+					<li class="page-item "><a class="page-link" href="/freeBoard/freeMain?sort=${sort}&field=${param.field}&searchText=${param.searchText}&page=${freeboards.number+1}">&rarr;</a></li>
+					<li class="page-item "><a class="page-link" href="/freeBoard/freeMain?sort=${sort}&field=${param.field}&searchText=${param.searchText}&page=${freeboards.totalPages-1}">마지막</a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>

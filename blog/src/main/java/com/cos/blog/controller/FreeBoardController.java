@@ -29,13 +29,15 @@ public class FreeBoardController {
 	
 		Page<FreeBoard> list = freeboard_Service.freeBoard_list(pageable);
 		
+		String sort = pageable.getSort().toString().replaceAll(" ", "").replace(':', ',');
+		
 		if(field.equals("title")) {
 			list = freeboard_Service.TitleSearch(searchText, pageable);
 		}
 		else if(field.equals("content")){
 			list = freeboard_Service.ContentSearch(searchText, pageable);
 		}
-		
+	
 //		else if(field.equals("TitleOrContent")){
 //			list = freeboard_Service.TitleOrContent_Search(searchText, pageable);
 //		}
@@ -49,6 +51,7 @@ public class FreeBoardController {
 		
 		model.addAttribute("startBlockPage", startBlockPage);
 		model.addAttribute("endBlockPage", endBlockPage);
+		model.addAttribute("sort",  sort);
 
 		model.addAttribute("freeboards", list);
 		
