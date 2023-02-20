@@ -54,6 +54,8 @@ public class FreeBoard {
 	@OrderBy("id desc")
 	private List<FreeReply> freeReplys;
 	
+	
+
 	@CreationTimestamp
 	private LocalDateTime createDate;
 

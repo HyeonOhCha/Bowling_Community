@@ -7,6 +7,7 @@
 	<sec:authentication property="principal"  var="principal"/>
 </sec:authorize> 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +22,31 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 
 </head>
+
+<style>
+     html,
+      body {
+        height: 100%;
+        padding: 0px;
+        margin: 0px;
+      }
+
+   
+      #wrap {
+        min-height: calc(100% - 120px);
+      }
+
+      footer {
+        background-color: #e9eaed;
+        margin: 0;
+      }
+      .jumbotron{
+             padding: 32px;
+      
+      }
+      
+</style>
+
 <body>
 
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
@@ -50,7 +76,6 @@
 					<ul class="navbar-nav" >
 						<li class="nav-item"><a class="nav-link" href="/galleryBoard/galleryMain">갤러리</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">현오님게시판</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">재성님게시판</a></li>
 						<li class="nav-item"><a class="nav-link" href="/freeBoard/freeMain">자유게시판</a></li>
 					</ul>
 			

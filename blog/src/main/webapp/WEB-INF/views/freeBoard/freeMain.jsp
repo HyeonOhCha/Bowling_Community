@@ -2,7 +2,7 @@
 
 <%@ include file="../layout/header.jsp"%>
 
-<div class="container">
+<div class="container" id="wrap">
 
 
 
@@ -48,11 +48,11 @@
 	</tbody>
 </c:forEach>
 </table>
+
+<c:if test="${not empty principal}">
 <a class="btn btn-primary" href="/freeBoard/freeSaveForm">글쓰기</a>
-
-</div>
-
-	<!-- 페이징 영역 시작 -->
+</c:if>
+<!-- 페이징 영역 시작 -->
 	<div class="text-xs-center">
 		<ul class="pagination justify-content-center">
 		
@@ -60,8 +60,8 @@
 			<c:choose>
 				<c:when test="${freeboards.first}"></c:when>
 				<c:otherwise>
-					<li class="page-item"><a class="page-link" href="/freeBoard/freeMain?sort=${sort}&field=${param.field}&searchText=${param.searchText}&page=0">처음</a></li>
-					<li class="page-item"><a class="page-link" href="/freeBoard/freeMain?sort=${sort}&field=${param.field}&searchText=${param.searchText}&page=${freeboards.number-1}">&larr;</a></li>
+					<li class="page-item"><a class="page-link" href="/freeBoard/freeMain?sort=${sort}&field=${param.field}&searchText=${param.searchText}&page=0">맨처음</a></li>
+					<li class="page-item"><a class="page-link" href="/freeBoard/freeMain?sort=${sort}&field=${param.field}&searchText=${param.searchText}&page=${freeboards.number-1}">이전</a></li>
 				</c:otherwise>
 			</c:choose>
 			
@@ -81,13 +81,16 @@
 			<c:choose>
 				<c:when test="${freeboards.last}"></c:when>
 				<c:otherwise>
-					<li class="page-item "><a class="page-link" href="/freeBoard/freeMain?sort=${sort}&field=${param.field}&searchText=${param.searchText}&page=${freeboards.number+1}">&rarr;</a></li>
-					<li class="page-item "><a class="page-link" href="/freeBoard/freeMain?sort=${sort}&field=${param.field}&searchText=${param.searchText}&page=${freeboards.totalPages-1}">마지막</a></li>
+					<li class="page-item "><a class="page-link" href="/freeBoard/freeMain?sort=${sort}&field=${param.field}&searchText=${param.searchText}&page=${freeboards.number+1}">다음</a></li>
+					<li class="page-item "><a class="page-link" href="/freeBoard/freeMain?sort=${sort}&field=${param.field}&searchText=${param.searchText}&page=${freeboards.totalPages-1}">맨끝</a></li>
 				</c:otherwise>
 			</c:choose>
 		</ul>
 	</div> 
 	<!-- 페이징 영역 끝 -->
+</div>
+
+	
 
 <%@ include file="../layout/footer.jsp"%>
 
