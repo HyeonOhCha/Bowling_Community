@@ -18,6 +18,7 @@ import javax.persistence.OrderBy;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -53,6 +54,7 @@ public class FreeReply {
 	@OneToMany(mappedBy = "freeReply", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) // mappedBy 연관관계의 주인이 아니다 (난 FK가 아니에요) DB에 칼럼을 만들지 마세요.
 	@JsonIgnoreProperties({"freeReply"})
 	@OrderBy("id desc")
+	@JsonManagedReference
 	private List<FreeSubReply> subFreeReplys;
 
 	@Override

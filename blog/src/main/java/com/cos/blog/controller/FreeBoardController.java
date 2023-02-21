@@ -72,14 +72,14 @@ public class FreeBoardController {
 	@GetMapping("/freeBoard/{id}")
 	public String findById(@PathVariable int id, Model model) {
 		freeboard_Service.CountUp(id);
+		model.addAttribute("board", freeboard_Service.freeBoard_detail(id));
 		
 //		FreeBoard a =	freeboard_Service.freeBoard_detail(id);
 //		List<FreeReply> b = a.getFreeReplys();
 //		System.out.println("b : " + b);
-//		
-		model.addAttribute("board", freeboard_Service.freeBoard_detail(id));
-//		model.addAttribute("reply", freeboard_Service.freeBoard_subReplys(id));
 //		model.addAttribute("reply", b);
+	
+//		model.addAttribute("reply", freeboard_Service.freeBoard_subReplys(id));
 		
 		return "freeBoard/freeDetail";
 	}

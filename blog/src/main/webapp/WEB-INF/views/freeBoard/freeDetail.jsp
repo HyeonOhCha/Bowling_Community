@@ -21,7 +21,7 @@
 		<div>${board.freeBoardContent}</div>
 	</div>
 	<hr />
-
+<c:if test="${not empty principal.user.id}">
 	<div class="card">
 		<form>
 			<input type="hidden" id="userId" value="${principal.user.id}" /> 
@@ -29,11 +29,14 @@
 			<div class="card-body">
 				<textarea id="freeReplyContent" class="form-control" rows="1"></textarea>
 			</div>
-			<div class="card-footer">
-				<button type="button" id="btn-freeReply-save" class="btn btn-primary">등록</button>
-			</div>
+			
+				<div class="card-footer">
+					<button type="button" id="btn-freeReply-save" class="btn btn-primary">등록</button>
+				</div>
+			
 		</form>
 	</div>
+	</c:if>
 	<br />
 	<div class="card">
 		<div class="card-header">댓글 리스트</div>
@@ -53,7 +56,7 @@
 				</li>
 				<!--  대댓글 시작 -->
 				<br>
-				<%-- <div class="card">
+				<div class="card">
 					<form>
 						<input type="hidden" id="userId" value="${principal.user.id}" /> 
 						<input type="hidden" id="freeBoardId" value="${board.id}" />
@@ -66,7 +69,9 @@
 						</div>
 					</form>
 				</div>
-	 	<c:forEach var="reply" items="${reply.subFreeReplys}">
+	     
+				</c:forEach>
+<%-- 				<c:forEach var="reply" items="${reply.subFreeReplys}">
 		 		<h5> 대댓글**</h5>
 					<li id="reply-1" class="list-group-item d-flex justify-content-between">
 						<div>${reply.freeSubReplyContent}</div>
@@ -78,8 +83,7 @@
 
 						</div>
 					</li>
-				</c:forEach>    --%>
-			</c:forEach>
+				</c:forEach> --%>
 		</ul>
 	</div>
 

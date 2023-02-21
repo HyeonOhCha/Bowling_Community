@@ -127,8 +127,8 @@ let index = {
 				dataType: "json"
 			}).done(function(resp){
 				alert("자유게시판 댓글작성이 완료되었습니다.");
-				//location.href = `/freeBoard/${data.freeBoardId}`;
-				location.href = `/`;
+				location.href = `/freeBoard/${data.freeBoardId}`;
+				//location.href = `/`;
 			}).fail(function(error){
 				alert(JSON.stringify(error));
 			}); 
