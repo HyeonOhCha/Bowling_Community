@@ -26,7 +26,7 @@
 			<th>회원번호</th>
 			<th>회원이름</th>
 			<th>회원이메일</th>
-		
+			<th>가입날짜</th>
 		</tr>
 	</thead>
 
@@ -36,8 +36,7 @@
 			<th>${user.id }</th>
 			<th>${user.username}</th>
 			<th>${user.email}</th>
-	<%-- 		<th>	<fmt:parseDate value="${user.createDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="lastupdate" type="both" />
-					<fmt:formatDate pattern="yyyy-MM-dd" value="${lastupdate}" /></th> --%>
+			<th><fmt:formatDate pattern="yyyy-MM-dd" value="${user.createDate}" /></th> 
 		</tr>
 	</tbody>
 </c:forEach>
