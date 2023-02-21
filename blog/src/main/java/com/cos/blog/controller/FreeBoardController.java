@@ -40,11 +40,7 @@ public class FreeBoardController {
 		else if(field.equals("content")){
 			list = freeboard_Service.ContentSearch(searchText, pageable);
 		}
-	
-//		else if(field.equals("TitleOrContent")){
-//			list = freeboard_Service.TitleOrContent_Search(searchText, pageable);
-//		}
-		
+			
 		int pageNumber=list.getPageable().getPageNumber(); //현재페이지
 		int totalPages=list.getTotalPages(); //총 페이지 수. 검색에따라 10개면 10개..
 		int pageBlock = 5; //블럭의 수 1, 2, 3, 4, 5	

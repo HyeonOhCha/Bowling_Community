@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.blog.model.Board;
+import com.cos.blog.model.FreeBoard;
 import com.cos.blog.model.RoleType;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.UserRepository;
@@ -71,8 +72,24 @@ public class UserService {
 
 	// 회원 목록 출력 메서드
 	@Transactional(readOnly = true)
-	public Object userList(Pageable pageable) {
+	public Page<User> userList(Pageable pageable) {
 		return userRepository.findAll(pageable);
+	}
+
+	// 회원 이름 검색
+	@Transactional(readOnly = true)
+	public Page<User> UsernameSearch(String searchText, Pageable pageable) {
+		Page<User> list = userRepository.findByUsernameContaining(searchText, pageable);
+        
+        return list;
+	}
+	
+	// 이메일 검색
+	@Transactional(readOnly = true)
+	public Page<User> EmailSearch(String searchText, Pageable pageable) {
+		Page<User> list = userRepository.findByEmailContaining(searchText, pageable);
+        
+        return list;
 	}
 	
 
