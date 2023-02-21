@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.blog.config.auth.PrincipalDetail;
 import com.cos.blog.dto.FreeReplySaveRequestDto;
+import com.cos.blog.dto.FreeSubReplySaveRequestDto;
 import com.cos.blog.dto.ResponseDto;
 import com.cos.blog.model.FreeBoard;
 import com.cos.blog.service.FreeBoardService;
@@ -57,17 +58,19 @@ public class FreeBoardApiController {
 	}
 	
 	// 대댓글용
-	@PostMapping("/api/freeBoard/{freeBoardId}/freeSubReply")
-	public ResponseDto<Integer> subReplySave(@RequestBody FreeReplySaveRequestDto freeRequest) {
-		freeboard_Service.freeReply_write(freeRequest);
+	@PostMapping("/api/freeBoard/{freeBoardId}/freeSubReply/{freeReplyId}")
+	public ResponseDto<Integer> subReplySave(@RequestBody FreeSubReplySaveRequestDto freeRequest) {
+
+		freeboard_Service.freeSubReply_write(freeRequest);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
+		
 	}
 	
-	@DeleteMapping("/api/freeBoard/freeSubReply/{id}")
-	public ResponseDto<Integer> subReplyDelete(@PathVariable int id) {
-		freeboard_Service.freeReply_delete(id);
-		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
-	}
+//	@DeleteMapping("/api/freeBoard/freeSubReply/{id}")
+//	public ResponseDto<Integer> subReplyDelete(@PathVariable int id) {
+//		freeboard_Service.freeReply_delete(id);
+//		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
+//	}
 
 
 }

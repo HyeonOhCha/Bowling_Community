@@ -2,7 +2,7 @@
 
 <%@ include file="../layout/header.jsp"%>
 
-<div class="container">
+<div class="container" id="wrap">
 	<button class="btn btn-secondary" onclick="history.back()">돌아가기</button>
 	<c:if test="${board.user.id == principal.user.id}">
 		<a href="/freeBoard/${board.id}/freeUpdateForm" class="btn btn-warning">수정</a>
@@ -21,18 +21,22 @@
 		<div>${board.freeBoardContent}</div>
 	</div>
 	<hr />
-
+<c:if test="${not empty principal.user.id}">
 	<div class="card">
 		<form>
-			<input type="hidden" id="userId" value="${principal.user.id}" /> <input type="hidden" id="freeBoardId" value="${board.id}" />
+			<input type="hidden" id="userId" value="${principal.user.id}" /> 
+			<input type="hidden" id="freeBoardId" value="${board.id}" />
 			<div class="card-body">
 				<textarea id="freeReplyContent" class="form-control" rows="1"></textarea>
 			</div>
-			<div class="card-footer">
-				<button type="button" id="btn-freeReply-save" class="btn btn-primary">등록</button>
-			</div>
+			
+				<div class="card-footer">
+					<button type="button" id="btn-freeReply-save" class="btn btn-primary">등록</button>
+				</div>
+			
 		</form>
 	</div>
+	</c:if>
 	<br />
 	<div class="card">
 		<div class="card-header">댓글 리스트</div>
@@ -43,7 +47,7 @@
 					<div>${reply.freeReplyContent}</div>
 					<div class="d-flex">
 						<div class="font-italic">작성자 : ${reply.user.username} &nbsp;</div>
-
+			
 						<c:if test="${reply.user.id eq principal.user.id}">
 							<button onClick="index.freeReplyDelete(${board.id}, ${reply.id})" class="badge">삭제</button>
 						</c:if>
@@ -51,31 +55,35 @@
 					</div>
 				</li>
 				<!--  대댓글 시작 -->
-					<%--<br>
+				<br>
 				<div class="card">
 					<form>
-						<input type="hidden" id="userId" value="${principal.user.id}" /> <input type="hidden" id="free_replyId" value="${board.free_replys}" />
+						<input type="hidden" id="userId" value="${principal.user.id}" /> 
+						<input type="hidden" id="freeBoardId" value="${board.id}" />
+						<input type="hidden" id="freeReplyId" value="${reply.id}" />
 						<div class="card-body">
-							<textarea id="freeSubReply-content" class="form-control" rows="1"></textarea>
+							<textarea id="freeSubReplyContent" class="form-control" rows="1"></textarea>
 						</div>
 						<div class="card-footer">
 							<button type="button" id="btn-freeSubReply-save" class="btn btn-primary">대댓등록</button>
 						</div>
 					</form>
 				</div>
-		 	<c:forEach var="reply" items="${board.free_replys.subFree_replys}">
-					<li id="reply-${reply.id}" class="list-group-item d-flex justify-content-between">
-						<div>${reply.content}</div>
+	     
+				</c:forEach>
+<%-- 				<c:forEach var="reply" items="${reply.subFreeReplys}">
+		 		<h5> 대댓글**</h5>
+					<li id="reply-1" class="list-group-item d-flex justify-content-between">
+						<div>${reply.freeSubReplyContent}</div>
 						<div class="d-flex">
-							<div class="font-italic">작성자 : ${reply.user.username} &nbsp;</div>
-							<c:if test="${reply.user.id eq principal.user.id}">
+							<div class="font-italic" >작성자 : ${reply.user.username} &nbsp;</div>
+							<c:if test="${reply.subFreeReplys.user.id eq principal.user.id}">
 								<button onClick="index.replyDelete(${board.id}, ${reply.id})" class="badge">삭제</button>
 							</c:if>
 
 						</div>
 					</li>
 				</c:forEach> --%>
-			</c:forEach>
 		</ul>
 	</div>
 

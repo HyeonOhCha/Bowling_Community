@@ -4,6 +4,9 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -13,6 +16,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,8 +38,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class UserController {
 	
-	
-	
+
 	@Value("${cos.key}")
 	private String cosKey;
 	
@@ -160,12 +163,26 @@ public class UserController {
 		
 		return  "redirect:/";
 	}
-
 	
+
 	
 	@GetMapping("/user/updateForm")
 	public String updateForm() {
 		return "user/updateForm";
 	}
+	
+	
+	// 회원 목록 출력
+	@GetMapping("/user/userList")
+	public String userList(Model model, @PageableDefault(size=3, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {
+		
+		model.addAttribute("userList",userService.userList(pageable));
+		return "user/userList";
+		
+	}
+	
+	
+	
+
 
 }

@@ -6,52 +6,42 @@
 
 
 
-<H2 >자유게시판</H2>
+<H2>회원목록</H2>
 
 
-<a class="btn btn-primary" href="/freeBoard/freeMain?sort=freeBoardCount,DESC&field=${param.field}&searchText=${param.searchText}">조회순</a>
-<a class="btn btn-primary" href="/freeBoard/freeMain?sort=freeBoardTitle,ASC&field=${param.field}&searchText=${param.searchText}">제목순</a>
-<a class="btn btn-primary" href="/freeBoard/freeMain?sort=userId,DESC&field=${param.field}&searchText=${param.searchText}">작성자순</a>
-
- 	<form method="GET"  action="/freeBoard/freeMain" class="form-inline d-Flex justify-content-end" role="search">
+<!--  	<form method="GET"  action="/freeBoard/freeMain" class="form-inline d-Flex justify-content-end" role="search">
 			<select name="field" id="field" class="form-control form-control-sm">
-				<!-- <option value="TitleOrContent">제목+내용</option> -->
+				<option value="TitleOrContent">제목+내용</option>
 				<option value="title">제목</option>
 				<option value="content">내용</option> 
 			</select>
         <input type="text" name="searchText" class="form-control" id="searchText" placeholder="검색" >
         <button type="submit" class="btn btn-primary mb-2">검색</button>
-    </form> 
+    </form>  -->
 
 
 <table class="table table-hover table-striped text-center" style="border: 1px solid;">
 	<thead>
 		<tr>		
-			<th>글번호</th>
-			<th>제목</th>
-			<th>작성자</th>
-			<th>등록일</th>
-			<th>조회수</th>
+			<th>회원번호</th>
+			<th>회원이름</th>
+			<th>회원이메일</th>
+			<th>가입날짜</th>
 		</tr>
 	</thead>
 
-<c:forEach var="board" items="${freeboards.content}">
+<c:forEach var="user" items="${userList.content}">
 	<tbody>
 		<tr>
-			<th>${board.id }</th>
-			<th><a href="/freeBoard/${board.id}"  style="color:black; text-decoration:none;"> ${board.freeBoardTitle }</th></a>
-			<th>${board.user.username }</th>
-			<th>	<fmt:parseDate value="${board.createDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="lastupdate" type="both" />
-					<fmt:formatDate pattern="yyyy-MM-dd" value="${lastupdate}" /></th>
-			<th>${board.freeBoardCount }</th>
+			<th>${user.id }</th>
+			<th>${user.username}</th>
+			<th>${user.email}</th>
+			<th><fmt:formatDate pattern="yyyy-MM-dd" value="${user.createDate}" /></th> 
 		</tr>
 	</tbody>
 </c:forEach>
 </table>
-
-<c:if test="${not empty principal}">
-<a class="btn btn-primary" href="/freeBoard/freeSaveForm">글쓰기</a>
-</c:if>
+<%-- 
 <!-- 페이징 영역 시작 -->
 	<div class="text-xs-center">
 		<ul class="pagination justify-content-center">
@@ -87,7 +77,7 @@
 			</c:choose>
 		</ul>
 	</div> 
-	<!-- 페이징 영역 끝 -->
+	<!-- 페이징 영역 끝 --> --%>
 </div>
 
 	
