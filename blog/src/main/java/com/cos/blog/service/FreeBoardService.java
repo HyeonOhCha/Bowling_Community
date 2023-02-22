@@ -34,11 +34,7 @@ public class FreeBoardService {
 		freeBoard_Repository.save(freeboard);
 	}
 
-//	@Transactional(readOnly = true)
-//	public Page<FreeBoard> freeBoard_list(Pageable pageable) {
-//
-//		return freeBoard_Repository.findAll(pageable);
-//	}
+
 
 	@Transactional(readOnly = true)
 	public Page<FreeBoard> freeBoard_list(Pageable pageable) {
@@ -46,14 +42,30 @@ public class FreeBoardService {
 		return freeBoard_Repository.findAll(pageable);
 	}
 	
+	//  제목으로 검색
 	@Transactional(readOnly = true)
-	    public Page<FreeBoard> search(String searchType, Pageable pageable) {
+	    public Page<FreeBoard> TitleSearch(String searchType, Pageable pageable) {
 
 			Page<FreeBoard> boardList = freeBoard_Repository.findByFreeBoardTitleContaining(searchType, pageable);
 	        
 	        return boardList;
 	   }
+	
+	//  내용으로 검색
+	@Transactional(readOnly = true)
+    public Page<FreeBoard> ContentSearch(String searchType, Pageable pageable) {
 
+		Page<FreeBoard> boardList = freeBoard_Repository.findByFreeBoardContentContaining(searchType, pageable);
+        
+        return boardList;
+   }
+	
+	// 제목+내용 검색
+//	@Transactional(readOnly = true)
+//	public Page<FreeBoard> TitleOrContent_Search(String searchText, Pageable pageable) {
+//		Page<FreeBoard> boardList = freeBoard_Repository.findByFreeBoardTitleContainingOrFreeBoardContentContaining(searchType, searchText, pageable);
+//		return boardList;
+//	}
 
 
 	@Transactional(readOnly = true)
@@ -95,6 +107,7 @@ public class FreeBoardService {
 
 		freeReply_Repository.deleteById(id);
 	}
+
 
 	
 

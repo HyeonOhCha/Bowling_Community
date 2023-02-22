@@ -51,7 +51,6 @@ public class FreeBoard {
 	
 	@OneToMany(mappedBy = "freeBoard", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) // mappedBy 연관관계의 주인이 아니다 (난 FK가 아니에요) DB에 칼럼을 만들지 마세요.
 	@JsonIgnoreProperties({"freeBoard"})
-	
 	@OrderBy("id desc")
 	private List<FreeReply> freeReplys;
 	
