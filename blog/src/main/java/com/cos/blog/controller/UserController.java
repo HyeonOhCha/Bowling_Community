@@ -174,6 +174,12 @@ public class UserController {
 		return "user/updateForm";
 	}
 	
+	@GetMapping("/user/userDeleteForm")
+	public String userDeleteForm() {
+		return "user/userDeleteForm";
+	}
+	
+
 	
 	// 회원 목록 출력
 	@GetMapping("/user/userList")
