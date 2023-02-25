@@ -1,5 +1,7 @@
 package com.cos.blog.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cos.blog.model.FreeBoard;
+import com.cos.blog.model.FreeReply;
 import com.cos.blog.service.FreeBoardService;
 
 @Controller
@@ -23,7 +26,7 @@ public class FreeBoardController {
 
 	@GetMapping("/freeBoard/freeMain")
 	public String freeForm(Model model,
-			@PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+			@PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
 			@RequestParam(required = false, defaultValue = "") String field,
 			@RequestParam(required = false, defaultValue = "") String searchText) {
 	
@@ -37,11 +40,7 @@ public class FreeBoardController {
 		else if(field.equals("content")){
 			list = freeboard_Service.ContentSearch(searchText, pageable);
 		}
-	
-//		else if(field.equals("TitleOrContent")){
-//			list = freeboard_Service.TitleOrContent_Search(searchText, pageable);
-//		}
-		
+			
 		int pageNumber=list.getPageable().getPageNumber(); //현재페이지
 		int totalPages=list.getTotalPages(); //총 페이지 수. 검색에따라 10개면 10개..
 		int pageBlock = 5; //블럭의 수 1, 2, 3, 4, 5	
@@ -70,6 +69,14 @@ public class FreeBoardController {
 	public String findById(@PathVariable int id, Model model) {
 		freeboard_Service.CountUp(id);
 		model.addAttribute("board", freeboard_Service.freeBoard_detail(id));
+		
+//		FreeBoard a =	freeboard_Service.freeBoard_detail(id);
+//		List<FreeReply> b = a.getFreeReplys();
+//		System.out.println("b : " + b);
+//		model.addAttribute("reply", b);
+	
+//		model.addAttribute("reply", freeboard_Service.freeBoard_subReplys(id));
+		
 		return "freeBoard/freeDetail";
 	}
 

@@ -12,6 +12,9 @@ let index = {
 			$("#btn-freeReply-save").on("click", ()=>{ 
 				this.replySave();
 			});
+			$("#btn-freeSubReply-save").on("click", ()=>{ 
+				this.subReplySave();
+			});
 		},
 
 		save: function(){
@@ -107,6 +110,30 @@ let index = {
 				alert(JSON.stringify(error));
 			}); 
 		},
+		
+		subReplySave : function(){
+			let data = {
+					userId: $("#userId").val(),
+					freeBoardId: $("#freeBoardId").val(),
+					freeReplyId: $("#freeReplyId").val(),
+					freeSubReplyContent: $("#freeSubReplyContent").val()
+			};
+			
+			$.ajax({ 
+				type: "POST",
+				url: `/api/freeBoard/${data.freeBoardId}/freeSubReply/${data.freeReplyId}`,
+				data: JSON.stringify(data),
+				contentType: "application/json; charset=utf-8",
+				dataType: "json"
+			}).done(function(resp){
+				alert("자유게시판 댓글작성이 완료되었습니다.");
+				location.href = `/freeBoard/${data.freeBoardId}`;
+				//location.href = `/`;
+			}).fail(function(error){
+				alert(JSON.stringify(error));
+			}); 
+		},
+		
 }
 
 index.init();

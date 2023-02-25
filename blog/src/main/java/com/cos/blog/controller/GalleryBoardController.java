@@ -26,9 +26,9 @@ public class GalleryBoardController {
 	
 	@GetMapping("/galleryBoard/{id}")
 	public String findById(@PathVariable int id, Model model) {
+		galleryBoardService.CountUp(id);
 		model.addAttribute("board",galleryBoardService.글상세보기(id));
 		return "galleryBoard/galleryDetail";
-		
 	}
 	
 	// USER 권한이 필요

@@ -7,6 +7,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,5 +47,14 @@ public class UserApiController {
 		
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
+	
+	// 회원 삭제
+	@DeleteMapping("/user/delete")
+	public ResponseDto<Integer> deleteById(@RequestBody User user){
+		userService.userDelete(user);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
+	
+	
 
 }

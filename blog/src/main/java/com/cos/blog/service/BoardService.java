@@ -73,3 +73,6 @@ public class BoardService {
 		replyRepository.deleteById(replyId);
 	}
 }
+
+
+

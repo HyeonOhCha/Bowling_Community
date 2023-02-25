@@ -24,7 +24,7 @@ public class GalleryBoardService {
 
 	@Transactional
 	public void 글쓰기(GalleryBoard galleryBoard, User user) { // title , content
-		galleryBoard.setCount(0);
+		galleryBoard.getGalleryBoardCount();
 		galleryBoard.setUser(user);
 		galleryBoardRepository.save(galleryBoard);
 	}
@@ -40,7 +40,11 @@ public class GalleryBoardService {
 		return galleryBoardRepository.findById(id).orElseThrow(() -> {
 			return new IllegalArgumentException("글 상세보기 실패 : 아이디를 찾을 수 없습니다.");
 		});
-
+	}
+	
+	@Transactional
+	public int CountUp(int id) {
+		return galleryBoardRepository.CountUp(id);
 	}
 
 	@Transactional
