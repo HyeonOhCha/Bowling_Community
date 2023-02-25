@@ -49,7 +49,7 @@
 			
 					<ul class="navbar-nav" >
 						<li class="nav-item"><a class="nav-link" href="/galleryBoard/galleryMain">갤러리</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">현오님게시판</a></li>
+						<li class="nav-item"><a class="nav-link" href="/joinBoard/joinMain">조인게시판</a></li>
 						<li class="nav-item"><a class="nav-link" href="#">재성님게시판</a></li>
 						<li class="nav-item"><a class="nav-link" href="/freeBoard/freeMain">자유게시판</a></li>
 					</ul>
