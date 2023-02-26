@@ -153,7 +153,7 @@ public class UserController {
 				.build();
 		
 		// 가입자 혹은 비가입자 체크 해서 처리
-		User originUser = userService.회원찾기(kakaoUser.getUsername()+"_"+kakaoProfile.getId());
+		User originUser = userService.회원찾기(kakaoUser.getUsername());
 
 		if(originUser.getUsername() == null) {
 			System.out.println("기존 회원이 아니기에 자동 회원가입을 진행합니다");
@@ -216,7 +216,5 @@ public class UserController {
 		
 	}
 	
-
-
 
 }

@@ -68,6 +68,7 @@ public class FreeBoardController {
 	@GetMapping("/freeBoard/{id}")
 	public String findById(@PathVariable int id, Model model) {
 		freeboard_Service.CountUp(id);
+		
 		model.addAttribute("board", freeboard_Service.freeBoard_detail(id));
 		
 //		FreeBoard a =	freeboard_Service.freeBoard_detail(id);

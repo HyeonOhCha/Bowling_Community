@@ -32,7 +32,6 @@ import lombok.NoArgsConstructor;
 @Entity
 public class FreeBoard {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
 	private int id; 
@@ -53,13 +52,7 @@ public class FreeBoard {
 	@JsonIgnoreProperties({"freeBoard"})
 	@OrderBy("id desc")
 	private List<FreeReply> freeReplys;
-	
-//	@OneToMany(mappedBy = "subFreeReplys", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) // mappedBy 연관관계의 주인이 아니다 (난 FK가 아니에요) DB에 칼럼을 만들지 마세요.
-//	@JsonIgnoreProperties({"subFreeReplys"})
-//	@OrderBy("id desc")
-//	private List<FreeReply> subFreeReplys;
-	
-	
+		
 
 	@CreationTimestamp
 	private LocalDateTime createDate;

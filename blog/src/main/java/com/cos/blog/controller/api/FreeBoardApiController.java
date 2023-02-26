@@ -58,7 +58,7 @@ public class FreeBoardApiController {
 	}
 	
 	// 대댓글용
-	@PostMapping("/api/freeBoard/{freeBoardId}/freeSubReply/{freeReplyId}")
+	@PostMapping("/api/freeBoard/freeSubReply/{freeReplyId}")
 	public ResponseDto<Integer> subReplySave(@RequestBody FreeSubReplySaveRequestDto freeRequest) {
 
 		freeboard_Service.freeSubReply_write(freeRequest);

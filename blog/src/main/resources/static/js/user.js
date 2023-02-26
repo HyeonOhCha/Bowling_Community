@@ -75,7 +75,9 @@ let index = {
 					password: $("#password").val()
 				
 			};
-			
+	 if(confirm('탈퇴 하시겠습니까?')) //확인 누르면 true, 취소 누르면 false
+
+    	{   
 			$.ajax({ 
 				type: "DELETE",
 				url: "/user/delete",
@@ -87,10 +89,11 @@ let index = {
 				//console.log(resp);
 				location.href = "/logout";
 			}).fail(function(error){
-				alert("비밀번호를 확인해주세요.");
+				alert(JSON.stringify(error));
 			}); 
-			
+			}
 		},
+		
 }
 
 index.init();

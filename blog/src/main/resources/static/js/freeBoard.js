@@ -112,22 +112,23 @@ let index = {
 		},
 		
 		subReplySave : function(){
+			let freeBoardId = $("#freeBoardId").val();
+		
 			let data = {
-					userId: $("#userId").val(),
-					freeBoardId: $("#freeBoardId").val(),
+					userId: $("#userId").val(),	
 					freeReplyId: $("#freeReplyId").val(),
 					freeSubReplyContent: $("#freeSubReplyContent").val()
 			};
 			
 			$.ajax({ 
 				type: "POST",
-				url: `/api/freeBoard/${data.freeBoardId}/freeSubReply/${data.freeReplyId}`,
+				url: `/api/freeBoard/freeSubReply/${data.freeReplyId}`,
 				data: JSON.stringify(data),
 				contentType: "application/json; charset=utf-8",
 				dataType: "json"
 			}).done(function(resp){
 				alert("자유게시판 댓글작성이 완료되었습니다.");
-				location.href = `/freeBoard/${data.freeBoardId}`;
+				location.href = `/freeBoard/${freeBoardId}`;
 				//location.href = `/`;
 			}).fail(function(error){
 				alert(JSON.stringify(error));

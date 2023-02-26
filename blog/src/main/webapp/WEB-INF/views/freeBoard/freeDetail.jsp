@@ -69,21 +69,24 @@
 						</div>
 					</form>
 				</div>
-	     
-				</c:forEach>
-<%-- 				<c:forEach var="reply" items="${reply.subFreeReplys}">
-		 		<h5> 대댓글**</h5>
-					<li id="reply-1" class="list-group-item d-flex justify-content-between">
-						<div>${reply.freeSubReplyContent}</div>
-						<div class="d-flex">
-							<div class="font-italic" >작성자 : ${reply.user.username} &nbsp;</div>
-							<c:if test="${reply.subFreeReplys.user.id eq principal.user.id}">
+					<c:forEach var="subReply" items="${reply.subFreeReplys}">
+						<li id="subReply" class="list-group-item d-flex justify-content-between">
+							<div>${subReply.freeSubReplyContent}</div>
+							<div class="d-flex">
+							<div class="font-italic" >작성자 : ${subReply.user.username} &nbsp;</div>
+							<c:if test="${subReply.user.id eq principal.user.id}">
 								<button onClick="index.replyDelete(${board.id}, ${reply.id})" class="badge">삭제</button>
 							</c:if>
+							
 
 						</div>
 					</li>
-				</c:forEach> --%>
+				</c:forEach> 
+	     
+				</c:forEach>
+				
+				
+		
 		</ul>
 	</div>
 
