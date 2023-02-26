@@ -109,7 +109,7 @@ public class FreeBoardService {
 
 	@Transactional
 	public void freeSubReply_write(FreeSubReplySaveRequestDto freeRequest) {
-		int result = freeSubReply_Repository.mSave(freeRequest.getUserId(), freeRequest.getFreeBoardId(), freeRequest.getFreeReplyId(),freeRequest.getFreeSubReplyContent());
+		int result = freeSubReply_Repository.mSave(freeRequest.getUserId(), freeRequest.getFreeReplyId(),freeRequest.getFreeSubReplyContent());
 		
 	}
 

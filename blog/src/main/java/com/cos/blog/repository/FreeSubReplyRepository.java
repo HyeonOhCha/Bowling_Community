@@ -8,7 +8,7 @@ import com.cos.blog.model.FreeSubReply;
 
 public interface FreeSubReplyRepository extends JpaRepository<FreeSubReply, Integer>{
 	@Modifying
-	@Query(value="INSERT INTO freeSubReply(userId, freeBoardId, freeReplyId, freeSubReplyContent, createDate) VALUES(?1, ?2, ?3, ?4, now())", nativeQuery = true)
-	int mSave(int userId, int freeBoardId, int freeReplyId, String freeReplyContent); // 업데이트된 행의 개수를 리턴해줌.  
+	@Query(value="INSERT INTO freeSubReply(userId, freeReplyId, freeSubReplyContent, createDate) VALUES(?1, ?2, ?3, now())", nativeQuery = true)
+	int mSave(int userId, int freeReplyId, String freeReplyContent); // 업데이트된 행의 개수를 리턴해줌.  
 	
 }
