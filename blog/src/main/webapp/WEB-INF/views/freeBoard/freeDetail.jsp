@@ -8,6 +8,13 @@
 		<a href="/freeBoard/${board.id}/freeUpdateForm" class="btn btn-warning">수정</a>
 		<button id="btn-freeDelete" class="btn btn-danger">삭제</button>
 	</c:if>
+	
+	<c:if test="${empty principal.user.id}">
+		<button disabled="disabled" onClick="index.freeLike(${board.id}, ${principal.user.id})"class="btn btn-danger"><span>추천👍${board.likeCount}</span></button>
+	</c:if>
+	<c:if test="${not empty principal.user.id}">
+		<button  onClick="index.freeLike(${board.id}, ${principal.user.id})"class="btn btn-danger"><span>추천👍${board.likeCount}</span></button>
+	</c:if>
 	<br /> <br />
 	<div>
 		글 번호 : <span id="id"><i>${board.id} </i></span> 작성자 : <span><i>${board.user.username} </i></span> 조회수 : <span><i>${board.freeBoardCount} </i></span>
