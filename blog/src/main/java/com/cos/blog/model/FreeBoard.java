@@ -1,7 +1,9 @@
 package com.cos.blog.model;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,27 +36,36 @@ public class FreeBoard {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
-	private int id; 
-	
+	private int id;
+
 	@Column(nullable = false, length = 100)
 	private String freeBoardTitle;
-	
+
 	@Lob // 대용량 데이터
 	private String freeBoardContent; // 섬머노트 라이브러리 <html>태그가 섞여서 디자인이 됨.
-	
+
 	private int freeBoardCount; // 조회수
-	
-	@ManyToOne(fetch = FetchType.EAGER)  // Many = Many,  User = One
-	@JoinColumn(name="userId")
-	private User user; // DB는 오브젝트를 저장할 수 없다. FK, 자바는 오브젝트를 저장할 수 있다. 
-	
-	@OneToMany(mappedBy = "freeBoard", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) // mappedBy 연관관계의 주인이 아니다 (난 FK가 아니에요) DB에 칼럼을 만들지 마세요.
-	@JsonIgnoreProperties({"freeBoard"})
+
+	@ManyToOne(fetch = FetchType.EAGER) // Many = Many, User = One
+	@JoinColumn(name = "userId")
+	private User user; // DB는 오브젝트를 저장할 수 없다. FK, 자바는 오브젝트를 저장할 수 있다.
+
+	@OneToMany(mappedBy = "freeBoard", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE) 
+	@JsonIgnoreProperties({ "freeBoard" })
 	@OrderBy("id desc")
 	private List<FreeReply> freeReplys;
-		
 
 	@CreationTimestamp
 	private LocalDateTime createDate;
+
+//	 @JsonIgnoreProperties({"freeBoard"})
+//	@OneToMany(mappedBy = "freeBoard", cascade = CascadeType.ALL)
+//	private Set<FreeLike> likes;
+
+	// 추천 수
+	private int likeCount;
+
+	// 비추천 수
+	private int hateCount;
 
 }

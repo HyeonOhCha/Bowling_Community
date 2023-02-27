@@ -120,6 +120,12 @@ public class FreeBoardService {
 		});
 	}
 
+
+	@Transactional
+	public void LikeUp(int boardId) {
+		int result = freeBoard_Repository.LikeUp(boardId);
+	}
+
 	
 
 }

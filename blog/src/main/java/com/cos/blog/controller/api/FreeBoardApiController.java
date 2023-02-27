@@ -15,7 +15,9 @@ import com.cos.blog.dto.FreeReplySaveRequestDto;
 import com.cos.blog.dto.FreeSubReplySaveRequestDto;
 import com.cos.blog.dto.ResponseDto;
 import com.cos.blog.model.FreeBoard;
+import com.cos.blog.model.User;
 import com.cos.blog.service.FreeBoardService;
+import com.cos.blog.service.FreeLikeService;
 
 @RestController
 public class FreeBoardApiController {
@@ -23,7 +25,9 @@ public class FreeBoardApiController {
 	@Autowired
 	private FreeBoardService freeboard_Service;
 	
-
+	@Autowired
+	private FreeLikeService freeLikeService;
+	
 	@PostMapping("/api/freeBoard")
 	public ResponseDto<Integer> save(@RequestBody FreeBoard freeBoard, @AuthenticationPrincipal PrincipalDetail principal) {
 		freeboard_Service.freeBoard_write(freeBoard, principal.getUser());
@@ -55,6 +59,17 @@ public class FreeBoardApiController {
 	public ResponseDto<Integer> replyDelete(@PathVariable int id) {
 		freeboard_Service.freeReply_delete(id);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1); 
+	}
+	
+	// 추천 업 
+	@PostMapping("/api/freeBoard/freeLike/{boardId}")
+	public boolean addLike(@RequestBody int userId, @PathVariable int boardId) {
+		boolean result = freeLikeService.addLike(userId, boardId);
+		
+		if(result==true) {
+			freeboard_Service.LikeUp(boardId);
+		}
+		return result; 
 	}
 	
 	// 대댓글용
