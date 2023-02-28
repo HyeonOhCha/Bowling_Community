@@ -58,14 +58,10 @@ public class FreeBoard {
 	@CreationTimestamp
 	private LocalDateTime createDate;
 
-//	 @JsonIgnoreProperties({"freeBoard"})
-//	@OneToMany(mappedBy = "freeBoard", cascade = CascadeType.ALL)
-//	private Set<FreeLike> likes;
 
 	// 추천 수
 	private int likeCount;
 
-	// 비추천 수
-	private int hateCount;
+
 
 }

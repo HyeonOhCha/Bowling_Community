@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
-import com.cos.blog.model.FreeBoard;
 import com.cos.blog.model.KakaoProfile;
 import com.cos.blog.model.OAuthToken;
 import com.cos.blog.model.User;
@@ -34,9 +33,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-// 인증이 안된 사용자들이 출입할 수 있는 경로를 /auth/**허용
-// 그냥 주소가 / 이면 index.jsp 허용
-// static 이하에 있는 /js/** , /css/**. /image/** 
 
 @Controller
 public class UserController {
@@ -167,18 +163,11 @@ public class UserController {
 		return  "redirect:/";
 	}
 	
-
 	
 	@GetMapping("/user/updateForm")
 	public String updateForm() {
 		return "user/updateForm";
 	}
-	
-	@GetMapping("/user/userDeleteForm")
-	public String userDeleteForm() {
-		return "user/userDeleteForm";
-	}
-	
 
 	
 	// 회원 목록 출력
