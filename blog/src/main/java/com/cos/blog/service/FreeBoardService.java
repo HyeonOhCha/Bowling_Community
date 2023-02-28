@@ -126,6 +126,12 @@ public class FreeBoardService {
 		int result = freeBoard_Repository.LikeUp(boardId);
 	}
 
+
+	@Transactional
+	public void HateUp(int boardId) {
+		int result = freeBoard_Repository.HateUp(boardId);
+	}
+
 	
 
 }

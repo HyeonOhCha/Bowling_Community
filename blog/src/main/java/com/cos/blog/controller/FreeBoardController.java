@@ -1,7 +1,5 @@
 package com.cos.blog.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cos.blog.model.FreeBoard;
-import com.cos.blog.model.FreeReply;
 import com.cos.blog.service.FreeBoardService;
 
 @Controller
@@ -58,8 +55,6 @@ public class FreeBoardController {
 	}
 
 
-
-	// USER 권한이 필요
 	@GetMapping("/freeBoard/freeSaveForm")
 	public String freeSaveForm() {
 		return "freeBoard/freeSaveForm";
@@ -70,17 +65,10 @@ public class FreeBoardController {
 		freeboard_Service.CountUp(id);
 		
 		model.addAttribute("board", freeboard_Service.freeBoard_detail(id));
-		
-//		FreeBoard a =	freeboard_Service.freeBoard_detail(id);
-//		List<FreeReply> b = a.getFreeReplys();
-//		System.out.println("b : " + b);
-//		model.addAttribute("reply", b);
 	
-//		model.addAttribute("reply", freeboard_Service.freeBoard_subReplys(id));
-		
 		return "freeBoard/freeDetail";
 	}
-
+	
 	@GetMapping("/freeBoard/{id}/freeUpdateForm")
 	public String updateForm(@PathVariable int id, Model model) {
 		model.addAttribute("board", freeboard_Service.freeBoard_detail(id));

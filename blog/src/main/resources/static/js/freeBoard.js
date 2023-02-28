@@ -158,6 +158,28 @@ let index = {
 		});
 	},
 	
+	freeHate: function(boardId, userId) {
+	
+		let data = userId;
+		$.ajax({
+			type: "POST",
+			url: "/api/freeBoard/freeHate/"+boardId,
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json"
+		}).done(function(resp) {
+			if(resp==false){
+				alert("이미 비추천 완료된 글입니다");
+			}
+			else{
+				alert("게시글 비추천 완료");
+			}
+			location.href = `/freeBoard/${boardId}`;
+		}).fail(function(error) {
+			alert(JSON.stringify(error));
+		});
+	},
+	
 
 }
 
