@@ -1,9 +1,7 @@
 package com.cos.blog.model;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -61,6 +59,9 @@ public class FreeBoard {
 
 	// 추천 수
 	private int likeCount;
+	
+	// 비추천 수
+	private int hateCount;
 
 
 

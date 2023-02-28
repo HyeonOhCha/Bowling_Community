@@ -25,8 +25,11 @@ public interface FreeBoardRepository extends JpaRepository<FreeBoard, Integer>{
 	@Modifying
 	@Query(value="update FreeBoard f set f.likeCount = f.likeCount + 1 where f.id = :id", nativeQuery = true)
 	int LikeUp(int id);
-	 
 	
-	
+	@Modifying
+	@Query(value="update FreeBoard f set f.hateCount = f.hateCount + 1 where f.id = :id", nativeQuery = true)
+	int HateUp(int id);
+
+
 }
 

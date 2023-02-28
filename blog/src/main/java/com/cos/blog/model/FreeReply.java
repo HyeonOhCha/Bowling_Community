@@ -62,9 +62,4 @@ public class FreeReply {
 				+ user + ", createDate=" + createDate + "]";
 	}
 
-
-
-
-
-
 }
