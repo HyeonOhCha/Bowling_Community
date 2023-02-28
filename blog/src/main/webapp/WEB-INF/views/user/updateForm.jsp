@@ -23,7 +23,8 @@
 		</div>
 		
 	</form>
-	<button id="btn-update" class="btn btn-primary">회원수정완료</button>
+	<button id="btn-update" class="btn btn-primary">회원수정</button>
+	<button id="btn-delete" class="btn btn-danger">회원탈퇴</button>
 
 </div>
 

@@ -152,7 +152,6 @@ let index = {
 			else{
 				alert("게시글 추천 완료");
 			}
-			
 			location.href = `/freeBoard/${boardId}`;
 		}).fail(function(error) {
 			alert(JSON.stringify(error));

@@ -26,7 +26,6 @@ public interface FreeBoardRepository extends JpaRepository<FreeBoard, Integer>{
 	@Query(value="update FreeBoard f set f.likeCount = f.likeCount + 1 where f.id = :id", nativeQuery = true)
 	int LikeUp(int id);
 	 
-   // Page<FreeBoard> findByFreeBoard_titleContainigOrFreeBoard_contentContainig(String freeBoard_title, String freeBoard_content, Pageable pageable);
 	
 	
 }
